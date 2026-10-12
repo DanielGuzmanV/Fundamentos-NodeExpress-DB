@@ -17,7 +17,7 @@ const ProductoModel = {
         'f.nombre as fabricante_nombre'
       )
       .leftJoin('categorias as c', 'p.id_categoria', 'c.id')
-      .leftJoin('fabricante as f', 'p.id_fabricante', 'f.id')
+      .leftJoin('fabricantes as f', 'p.id_fabricante', 'f.id')
       .where('p.activo', 1);
 
     // 2. Filtros dinamicos
