@@ -47,8 +47,17 @@ const ProductoService = {
     }
 
     const productos = await ProductoModel.getAll(filtros);
-    if(productos.length <= 0) throw new AppError("No se encontro ningun producto.", 404)
-    
+
+    const hasActiveFilters = Boolean(min_precio || nombre || orden || pagina || limite);
+
+    if(productos.length <= 0 && hasActiveFilters) { 
+      throw new AppError("No se encontro ningun producto con los filtros especificados.", 404)
+    }
+
+    if(productos.length <= 0) {
+      return [];
+    }
+
     return productos.map(p => {
       const datos = p;
 
